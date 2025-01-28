@@ -4,13 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace 
+
+namespace Calculator.Test.Unit
 {
     public class CalculatorTestUnit
     {
         [SetUp]
         public void Setup()
         {
+
         }
 
         [Test]
