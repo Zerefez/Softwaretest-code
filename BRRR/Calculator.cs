@@ -8,6 +8,7 @@ namespace Calculator
 {
     public class Calculator
     {
+        
         private static double Add(double a, double b)
         {
             return a + b;
