@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
-    public class Calculator
+    public class CalculatorApp
     {
         
-        private static double Add(double a, double b)
+        public double Add(double a, double b)
         {
             return a + b;
             
         }
-        private static double Subtract(double a, double b)
+        public double Subtract(double a, double b)
         {
             return a - b;
 
         }
-        private static double Multiply(double a, double b)
+        public double Multiply(double a, double b)
         {
             return a + b;
 
         }
-        private static double Power(double x, double exp)
+        public double Power(double x, double exp)
         {
             return Math.Pow(x, exp);
         }
