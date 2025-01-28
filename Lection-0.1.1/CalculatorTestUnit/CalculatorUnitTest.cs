@@ -4,7 +4,7 @@ using System;
 using Calculator;
 
 
-namespace CalculatorTestUnit;
+namespace Calculator.Test.Unit;
 
 internal class Tests
 {
