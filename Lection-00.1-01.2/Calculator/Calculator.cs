@@ -9,6 +9,8 @@ namespace Calculator
     public class CalculatorApp
     {
         
+        public double Accumulator {get; private set; }
+
         public double Add(double a, double b)
         {
             return a + b;
@@ -28,5 +30,17 @@ namespace Calculator
         {
             return Math.Pow(x, exp);
         }
+
+        public double Divide(double dividend, double divisor) {
+            if (divisor == 0) {
+                throw new DivideByZeroException();
+            }
+            return dividend / divisor;
+        }
+
+        public void Clear(){
+            Accumulator = 0;
+        }
+
     }
 }
