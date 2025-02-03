@@ -6,6 +6,134 @@ namespace Calculator.Test.Unit
 {
     internal class CalculatorTests
     {
+         private CalculatorApp uut;
+
+        [SetUp]
+        public void Setup()
+        {
+            uut = new CalculatorApp();
+        }
+
+        [Test]
+        public void TestAdd()
+        {
+            // Act
+            var result = uut.Add(5);
+            // Assert
+            Assert.That(result, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void TestSubtract()
+        {
+            // Act
+            uut.Add(5);
+            var result = uut.Subtract(3);
+            // Assert
+            Assert.That(result, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void TestMultiply()
+        {
+            // Act
+            uut.Add(5);
+            var result = uut.Multiply(3);
+            // Assert
+            Assert.That(result, Is.EqualTo(15));
+        }
+
+        [Test]
+        public void TestPower()
+        {
+            // Act
+            uut.Add(5);
+            var result = uut.Power(3);
+            // Assert
+            Assert.That(result, Is.EqualTo(125));
+        }
+
+        [Test]
+        public void TestDivide()
+        {
+            // Act
+            var result = uut.Divide(6, 3);
+            // Assert
+            Assert.That(result, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void TestDivideByZero()
+        {
+            // Act & Assert
+            Assert.Throws<DivideByZeroException>(() => uut.Divide(6, 0));
+        }
+
+        [Test]
+        public void TestAccumulatorInitialValue()
+        {
+            // Assert
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void TestAccumulatorAfterAdd()
+        {
+            // Act
+            uut.Add(5);
+            // Assert
+            Assert.That(uut.Accumulator, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void TestAccumulatorAfterSubtract()
+        {
+            // Act
+            uut.Add(5);
+            uut.Subtract(3);
+            // Assert
+            Assert.That(uut.Accumulator, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void TestAccumulatorAfterMultiply()
+        {
+            // Act
+            uut.Add(5);
+            uut.Multiply(3);
+            // Assert
+            Assert.That(uut.Accumulator, Is.EqualTo(15));
+        }
+
+        [Test]
+        public void TestAccumulatorAfterPower()
+        {
+            // Act
+            uut.Add(5);
+            uut.Power(3);
+            // Assert
+            Assert.That(uut.Accumulator, Is.EqualTo(125));
+        }
+
+        [Test]
+        public void TestAccumulatorAfterDivide()
+        {
+            // Act
+            uut.Divide(6, 3);
+            // Assert
+            Assert.That(uut.Accumulator, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void TestAccumulatorAfterDivideByZero()
+        {
+            // Act & Assert
+            Assert.Throws<DivideByZeroException>(() => uut.Divide(6, 0));
+            // Assert
+            Assert.That(uut.Accumulator, Is.EqualTo(0));
+        }
+        
+        /* 00.1 OPGAVE
         private CalculatorApp uut;
 
         [SetUp]
@@ -126,5 +254,6 @@ namespace Calculator.Test.Unit
             // Assert
             Assert.That(uut.Accumulator, Is.EqualTo(0));
         }
+        */
     }
 }

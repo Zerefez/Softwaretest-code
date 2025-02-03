@@ -2,11 +2,11 @@
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lection-0.1.1", "Lection-0.1.1", "{BA12DC7E-BBC9-D69B-0B59-B27DFD1F6134}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lection-00.1-01.2", "Lection-00.1-01.2", "{BA12DC7E-BBC9-D69B-0B59-B27DFD1F6134}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Lection-0.1.1\Calculator\Calculator.csproj", "{D71A3F91-BB57-1D98-EDBD-A071E07320A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Lection-00.1-01.2\Calculator\Calculator.csproj", "{D71A3F91-BB57-1D98-EDBD-A071E07320A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorTestUnit", "Lection-0.1.1\CalculatorTestUnit\CalculatorTestUnit.csproj", "{0B10AD7E-701C-4341-9A2C-CA4DBE83E0EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculatorTestUnit", "Lection-00.1-01.2\CalculatorTestUnit\CalculatorTestUnit.csproj", "{0B10AD7E-701C-4341-9A2C-CA4DBE83E0EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
