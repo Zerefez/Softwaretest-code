@@ -34,7 +34,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Test with coverage
-      run: dotnet test --no-build --verbosity normal --settings coverlet.runsettings
+      run: dotnet test Lection-00.1-01.2/CalculatorTestUnit/CalculatorTestUnit.csproj --no-build --verbosity normal --settings coverlet.runsettings
     - name: Upload coverage report
       uses: actions/upload-artifact@v4
       with:
