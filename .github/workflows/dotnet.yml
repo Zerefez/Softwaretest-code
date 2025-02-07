@@ -40,3 +40,10 @@ jobs:
       with:
         name: code-coverage-report
         path: "**/coverage.cobertura.xml"
+    - name: Install ReportGenerator
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
+    - name: Generate Coverage Summary
+      run: reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:TextSummary
+    - name: Display Coverage Summary
+      run: cat coveragereport/Summary.txt
+
