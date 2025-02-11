@@ -1,0 +1,15 @@
+# See https://docs.gitlab.com/ee/ci/testing/unit_test_report_examples.html
+image: mcr.microsoft.com/dotnet/sdk:8.0
+build-and-test:
+  stage: test
+  variables:
+    GIT_STRATEGY: clone
+  script:
+    - 'dotnet clean'
+    - 'dotnet build'
+    - 'dotnet test --logger:"junit;MethodFormat=Class;FailureBodyFormat=Verbose"'
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - ./**/TestResults.xml
