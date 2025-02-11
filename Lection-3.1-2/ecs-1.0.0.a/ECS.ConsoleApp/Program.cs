@@ -10,7 +10,7 @@ namespace ECS.ConsoleApp
             Console.WriteLine("Testing ECS.Legacy");
 
             // Make an ECS with a threshold of 23
-            var control = new EcsController(23);
+            var control = new EcsController(23, new TempSensor(), new Heater());
 
             for (int i = 1; i <= 15; i++)
             {

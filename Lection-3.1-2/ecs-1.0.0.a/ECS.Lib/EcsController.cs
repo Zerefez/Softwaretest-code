@@ -5,14 +5,14 @@ namespace ECS.Lib
     public class EcsController
     {
         private int _threshold;
-        private readonly TempSensor _tempSensor;
-        private readonly Heater _heater;
+        private readonly ITempSensor _tempSensor;
+        private readonly IHeater _heater;
 
-        public EcsController(int thr)
+        public EcsController(int thr, ITempSensor tempSensor, IHeater heater)
         {
             SetThreshold(thr);
-            _tempSensor = new TempSensor();
-            _heater = new Heater();
+            _tempSensor = tempSensor;
+            _heater = heater;
         }
 
         public void Regulate()
@@ -39,11 +39,6 @@ namespace ECS.Lib
         public int GetCurTemp()
         {
             return _tempSensor.GetTemp();
-        }
-
-        public bool RunSelfTest()
-        {
-            return _tempSensor.RunSelfTest() && _heater.RunSelfTest();
         }
     }
 }

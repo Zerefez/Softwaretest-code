@@ -1,6 +1,6 @@
 ﻿namespace ECS.Lib
 {
-    public class Heater
+    public class Heater : IHeater
     {
         public void TurnOn()
         {
@@ -12,9 +12,5 @@
             System.Console.WriteLine("Heater is off");
         }
 
-        public bool RunSelfTest()
-        {
-            return true;
-        }
     }
 }
