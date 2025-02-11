@@ -26,18 +26,14 @@ jobs:
     - name: Restore dependencies
       run: |
         if [ -z "${{ github.event.inputs.project }}" ]; then
-          for proj in $(find . -name "*.csproj"); do
-            dotnet restore "$proj"
-          done
+          dotnet restore
         else
           dotnet restore "${{ github.event.inputs.project }}"
         fi
     - name: Build
       run: |
         if [ -z "${{ github.event.inputs.project }}" ]; then
-          for proj in $(find . -name "*.csproj"); do
-            dotnet build "$proj" --no-restore
-          done
+          dotnet build --no-restore
         else
           dotnet build "${{ github.event.inputs.project }}" --no-restore
         fi
@@ -55,29 +51,36 @@ jobs:
     - name: Restore dependencies
       run: |
         if [ -z "${{ github.event.inputs.project }}" ]; then
-          for proj in $(find . -name "*.csproj"); do
-            dotnet restore "$proj"
-          done
+          dotnet restore
         else
           dotnet restore "${{ github.event.inputs.project }}"
         fi
     - name: Run Tests with Coverage
       run: |
+        mkdir -p TestResults
         if [ -z "${{ github.event.inputs.project }}" ]; then
           for test_proj in $(find . -name "*Test*.csproj"); do
-            dotnet test "$test_proj" --verbosity normal --collect:"XPlat Code Coverage" --settings coverlet.runsettings
+            proj_name=$(basename "$test_proj" .csproj)
+            dotnet test "$test_proj" --verbosity normal --collect:"XPlat Code Coverage" --results-directory "TestResults/$proj_name" --settings coverlet.runsettings
           done
         else
-          dotnet test "${{ github.event.inputs.project }}" --verbosity normal --collect:"XPlat Code Coverage" --settings coverlet.runsettings
+          proj_name=$(basename "${{ github.event.inputs.project }}" .csproj)
+          dotnet test "${{ github.event.inputs.project }}" --verbosity normal --collect:"XPlat Code Coverage" --results-directory "TestResults/$proj_name" --settings coverlet.runsettings
         fi
+    - name: Install ReportGenerator
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
+    - name: Generate and Display Coverage Summaries
+      run: |
+        for report in TestResults/*/coverage.cobertura.xml; do
+          if [ -f "$report" ]; then
+            report_dir=$(dirname "$report")
+            reportgenerator -reports:"$report" -targetdir:"$report_dir/coveragereport" -reporttypes:TextSummary
+            echo "Coverage summary for $(basename $report_dir):"
+            cat "$report_dir/coveragereport/Summary.txt"
+          fi
+        done
     - name: Upload coverage reports
       uses: actions/upload-artifact@v4
       with:
-        name: code-coverage-report
-        path: "**/coverage.cobertura.xml"
-    - name: Install ReportGenerator
-      run: dotnet tool install --global dotnet-reportgenerator-globaltool
-    - name: Generate Coverage Summary
-      run: reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:TextSummary
-    - name: Display Coverage Summary
-      run: cat coveragereport/Summary.txt
+        name: code-coverage-reports
+        path: TestResults/*/coveragereport/Summary.txt
