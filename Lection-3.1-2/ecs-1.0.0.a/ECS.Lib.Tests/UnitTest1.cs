@@ -10,6 +10,7 @@ namespace ECS.Lib.Tests
     {
         private FakeHeater _fakeHeater;
         private FakeTempSensor _fakeTempSensor;
+         private FakeWindow _fakeWindow;
         private EcsController _controller;
         private StringWriter _consoleOutput;
 
@@ -18,7 +19,8 @@ namespace ECS.Lib.Tests
         {
             _fakeHeater = new FakeHeater();
             _fakeTempSensor = new FakeTempSensor();
-            _controller = new EcsController(23, _fakeTempSensor, _fakeHeater);
+            _fakeWindow = new FakeWindow();
+            _controller = new EcsController(23,30, _fakeTempSensor, _fakeHeater,_fakeWindow);
             _consoleOutput = new StringWriter();
             Console.SetOut(_consoleOutput);
         }
@@ -34,11 +36,11 @@ namespace ECS.Lib.Tests
         public void Regulate_MultipleRandomTemperatures_HeaterBehaviorIsCorrect()
         {
             // Arrange
-            int threshold = 23;
-            _controller.SetThreshold(threshold);
             int iterations = 100;
-            bool heaterTurnedOn = false;
-            bool heaterTurnedOff = false;
+            int heaterOnCount = 0;
+            int heaterOffCount = 0;
+            int windowOpenCount = 0;
+            int windowCloseCount = 0;
 
             // Act
             for (int i = 0; i < iterations; i++)
@@ -48,24 +50,21 @@ namespace ECS.Lib.Tests
                 _consoleOutput.GetStringBuilder().Clear();
 
                 if (output.Contains("Heater is on"))
-                {
-                    heaterTurnedOn = true;
-                }
+                    heaterOnCount++;
                 else if (output.Contains("Heater is off"))
-                {
-                    heaterTurnedOff = true;
-                }
+                    heaterOffCount++;
 
-                // If both conditions are met, exit early
-                if (heaterTurnedOn && heaterTurnedOff)
-                {
-                    break;
-                }
+                if (output.Contains("Window is open"))
+                    windowOpenCount++;
+                else if (output.Contains("Window is closed"))
+                    windowCloseCount++;
             }
 
             // Assert
-            Assert.IsTrue(heaterTurnedOn, "Heater was never turned on during the test.");
-            Assert.IsTrue(heaterTurnedOff, "Heater was never turned off during the test.");
+            Assert.Greater(heaterOnCount, 0, "Heater was never turned on during the test.");
+            Assert.Greater(heaterOffCount, 0, "Heater was never turned off during the test.");
+            Assert.Greater(windowOpenCount, 0, "Window was never opened during the test.");
+            Assert.Greater(windowCloseCount, 0, "Window was never closed during the test.");
         }
     }
 }
