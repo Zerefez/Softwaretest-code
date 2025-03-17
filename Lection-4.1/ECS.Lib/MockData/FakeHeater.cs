@@ -11,4 +11,9 @@ public class FakeHeater : IHeater
     {
         System.Console.WriteLine("Heater is off");
     }
+
+    public bool RunSelfTest()
+    {
+        return true;
+    }
 }
