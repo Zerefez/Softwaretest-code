@@ -1,0 +1,10 @@
+Skab låst med RFID: 4525254
+Skab låst med RFID: 1234
+Skab låst op med RFID: 1234
+Skab låst med RFID: 1234
+Skab låst op med RFID: 1234
+14:23:33: Skab låst med RFID: 1234
+15:37:43: Skab låst med RFID: 123456
+15:37:55: Skab låst op med RFID: 123456
+15:03:49: Skab låst med RFID: 1234
+15:04:04: Skab låst op med RFID: 1234
